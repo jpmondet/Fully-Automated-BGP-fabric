@@ -1,0 +1,61 @@
+---
+- name: Fabric building
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Add network interfaces
+      template: 
+        src: interfaces.j2
+        dest: /etc/network/interfaces
+
+    - name: Up physical interfaces of servers
+      shell: ip addr flush dev "{{ item.0 }}" && ifup "{{ item.0 }}" --force
+      when: "'servers' in group_names"
+      ignore_errors: yes
+      with_items: 
+        - "{{ interfaces }}"
+
+    - name: Up loopback interfaces of servers
+      shell: ip addr flush dev lo:"{{ as }}" && ifup lo:"{{ as }}" --force
+      when: "'servers' in group_names"
+      ignore_errors: yes
+
+    - name: Restart networking service
+      service: 
+        name: networking
+        state: restarted
+
+    - name: Get keys of cumulus repo
+      shell: wget -O- https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey | apt-key add -
+      when: "'servers' in group_names"
+
+    - name: Add repo
+      shell: echo "deb [arch=amd64] https://apps3.cumulusnetworks.com/repos/deb $(lsb_release -cs) roh-3" >> /etc/apt/sources.list.d/cumulus-apps-deb-$(lsb_release -cs).list
+      when: "'servers' in group_names"
+
+    - name: Apt update/upgrade
+      apt:
+        upgrade: yes
+        update_cache: yes
+      when: "'servers' in group_names"
+
+    - name: Install FRR
+      apt:
+        name: frr
+      when: "'servers' in group_names"
+
+    - name: Activating bgp + zebra daemons
+      template: 
+        src: daemons
+        dest: /etc/frr/daemons
+
+    - name: Adding BGP config 
+      template: 
+        src: bgp.j2
+        dest: /etc/frr/frr.conf
+
+    - name: Restart frr service
+      service: 
+        name: frr
+        state: restarted
