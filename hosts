@@ -1,0 +1,9 @@
+[spines]
+spine01
+spine02
+
+[leafs]
+leaf0[1:4]
+
+[servers]
+server0[1:4]

@@ -1,0 +1,27 @@
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet dhcp
+
+{% for int in interfaces %}
+auto {{ int.name }} 
+iface {{ int.name }} inet static
+    address {{ int.addr }}
+    netmask 255.255.255.254
+
+{% endfor %}
+{% if loopback is defined %}
+auto lo:{{ as }} 
+iface lo:{{ as }} inet static
+    address {{ loopback }}
+    netmask 255.255.255.255
+
+{% endif %}
+
+{# note: 
+    We could use dummy interfaces instead of loopbacks.
+    
+    sudo ip link add name dummy0 type dummy
+    sudo ip add a 111.111.111.111/32 dev dummy0
+    sudo ip link set dev dummy0 up
+#}

@@ -1,0 +1,9 @@
+---
+
+interfaces: 
+  - {name: swp1, addr: 10.1.1.0, mask: 31, up: false}
+  - {name: swp2, addr: 10.1.2.0, mask: 31, up: false}
+  - {name: swp51, addr: 10.10.10.1, mask: 31, up: true}
+  - {name: swp52, addr: 10.20.10.1, mask: 31, up: true}
+as: 10000
+range: 1
