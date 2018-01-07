@@ -11,6 +11,7 @@ iface {{ int.name }} inet static
     netmask {{ int.mask }}
   {% elif addr is defined and option is defined -%}
 iface {{ int.name }} inet manual
+  {% endif -%}
   {% if addrv6 is defined -%}
 iface {{ int.name }} inet6 static
     address {{ int.addrv6 }}
