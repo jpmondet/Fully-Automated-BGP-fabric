@@ -1,0 +1,21 @@
+---
+- name: Get keys of cumulus repo  
+  apt_key:
+    url: https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey
+    state: present
+  when: "'servers' in group_names"
+
+- name: Add repo
+  shell: echo "deb [arch=amd64] https://apps3.cumulusnetworks.com/repos/deb $(lsb_release -cs) roh-3" >> /etc/apt/sources.list.d/cumulus-apps-deb-$(lsb_release -cs).list
+  when: "'servers' in group_names"
+
+- name: Apt update/upgrade
+  apt:
+    upgrade: yes
+    update_cache: yes
+  when: "'servers' in group_names"
+
+- name: Install FRR
+  apt:
+    name: frr
+  when: "'servers' in group_names"

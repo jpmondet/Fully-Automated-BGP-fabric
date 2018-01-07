@@ -4,56 +4,22 @@
   become: true
 
   tasks:
-#
-#    - include_tasks: tasks/ipv4/interfaces.yml
-#      when: option is not defined
 
-    - name: Add network interfaces
-      template: 
-        src: interfaces.j2
-        dest: /etc/network/interfaces
+    - include_tasks: tasks/configuring_interfaces.yml
 
-    - name: Enabling interfaces on servers
-      shell: ip addr flush dev "{{ item.name }}" && ifup "{{ item.name }}" --force
-      when: "'servers' in group_names"
-      ignore_errors: yes
-      with_items: 
-        - "{{ interfaces }}"
+#    - include_tasks: tasks/5549/adding_servers_interfaces.yml
+#      when: option == '5549'
 
-    - name: Restart networking service
-      service: 
-        name: networking
-        state: restarted
-
-    - name: Get keys of cumulus repo  
-      apt_key:
-        url: https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey
-        state: present
-      when: "'servers' in group_names"
-
-    - name: Add repo
-      shell: echo "deb [arch=amd64] https://apps3.cumulusnetworks.com/repos/deb $(lsb_release -cs) roh-3" >> /etc/apt/sources.list.d/cumulus-apps-deb-$(lsb_release -cs).list
-      when: "'servers' in group_names"
-
-    - name: Apt update/upgrade
-      apt:
-        upgrade: yes
-        update_cache: yes
-      when: "'servers' in group_names"
-
-    - name: Install FRR
-      apt:
-        name: frr
-      when: "'servers' in group_names"
+    - include_tasks: tasks/install_frr_servers.yml
 
     - name: Activating bgp + zebra daemons
       template: 
-        src: daemons
+        src: templates/daemons
         dest: /etc/frr/daemons
 
     - name: Adding BGP config 
       template: 
-        src: bgp.j2
+        src: templates/bgp.j2
         dest: /etc/frr/frr.conf
 
     - name: Restart frr service

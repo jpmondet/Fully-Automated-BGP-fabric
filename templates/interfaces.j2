@@ -3,19 +3,13 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet dhcp
 
-{% for int in interfaces -%}
-auto {{ int.name }}
-  {% if addr is defined and option is not defined -%}
+{% for int in interfaces %}
+auto {{ int.name }} 
 iface {{ int.name }} inet static
     address {{ int.addr }}
     netmask {{ int.mask }}
-  {% endif -%}
-  {% if addrv6 is defined -%}
-iface {{ int.name }} inet6 static
-    address {{ int.addr }}
-    netmask {{ int.mask }}
-  {% endif -%}
-{% endfor -%}
+
+{% endfor %}
 
 
 {# Becane Useless..

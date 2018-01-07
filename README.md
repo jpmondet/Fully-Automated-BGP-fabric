@@ -16,8 +16,9 @@ Assuming you are playing with "[Cumulus In The Cloud/CITC](https://cumulusnetwor
 To save you some time, here is the detailed physical topology: 
 
 ![alt text](https://github.com/jpmondet/FullyAutomatedBGPfabric/raw/master/topoCICT.png "CICT topology") 
-*Note that servers are using Ubuntu 16.04.3 LTS  & spine/leaf are using Cumulus Linux 3.4.3 at this moment [01/07/2018]*
 
+
+*Note that servers are using **Ubuntu 16.04.3 LTS**  & spine/leaf are using **Cumulus Linux 3.4.3** at this moment [01/07/2018]*
 
 
 ## How-to
@@ -36,20 +37,29 @@ ansible-playbook generate-network.yml -i hosts
 
 And *Voilà*, you can start to play with BGP ! :-)
 
-### Options [/!\ For now Only IPv4 is supported]
-  - Fully IPv4
+### Options 
+
+**[/!\ For now Only IPv4 is supported]**
+
+  - **Fully IPv4**
+
     By default, the playbook assigns IPv4 addresses on interfaces and negociates IPv4 Address Family during BGP sessions establishment. 
 
-  - Fully IPv6
+  - **Fully IPv6**
+
     By using the option `IPv6`, the playbook will activate **Link-Local** IPv6 addresses on interfaces and will negociate IPv6 Address Family during BGP sessions establishment.
 
-`ansible-playbook generate-network.yml -i hosts -e "option=IPv6"`
+```bash
+ansible-playbook generate-network.yml -i hosts -e "option=ipv6"
+```
 
-  - RFC 5549
+  - **RFC 5549**
+
     By using the option `RFC5549`, the playbook will activate **Link-Local** IPv6 addresses on interfaces and will negociate IPv**4** Address Family during BGP sessions establishment.
 
-`ansible-playbook generate-network.yml -i hosts -e "option=RFC5549"`
-
+```bash
+`ansible-playbook generate-network.yml -i hosts -e "option=5549"`
+```
 
 
 
