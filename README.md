@@ -39,7 +39,8 @@ And *Voilà*, you can start to play with BGP ! :-)
 
 ### Options 
 
-**[/!\ For now Only IPv4 is supported]**
+*[/!\ For now Only IPv4 is supported]*
+*[/!\ IPv6 is in beta]*
 
   - **Fully IPv4**
 
