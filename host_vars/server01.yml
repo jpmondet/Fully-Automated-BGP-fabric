@@ -3,6 +3,6 @@
 interfaces: 
   - {name: eth1, addr: 10.1.1.1, mask: 31, up: true}
   - {name: eth2, addr: 10.2.1.1, mask: 31, up: true}
-  - {name: "lo:1", addr: 11.11.11.11, mask: 32, up: true}
+  - {name: lo:1, addr: 11.11.11.11, mask: 32, up: true}
 as: 1
 k8s_master: true

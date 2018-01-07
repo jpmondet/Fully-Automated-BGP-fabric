@@ -13,8 +13,8 @@
         src: interfaces.j2
         dest: /etc/network/interfaces
 
-    - name: Enabling physical interfaces of servers
-      shell: ip addr flush dev "{{ item.0 }}" && ifup "{{ item.0 }}" --force
+    - name: Enabling interfaces on servers
+      shell: ip addr flush dev "{{ item.name }}" && ifup "{{ item.name }}" --force
       when: "'servers' in group_names"
       ignore_errors: yes
       with_items: 
@@ -25,8 +25,10 @@
         name: networking
         state: restarted
 
-    - name: Get keys of cumulus repo
-      shell: wget -O- https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey | apt-key add -
+    - name: Get keys of cumulus repo  
+      apt_key:
+        url: https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey
+        state: present
       when: "'servers' in group_names"
 
     - name: Add repo

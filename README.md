@@ -16,6 +16,9 @@ Assuming you are playing with "[Cumulus In The Cloud/CITC](https://cumulusnetwor
 To save you some time, here is the detailed physical topology: 
 
 ![alt text](https://github.com/jpmondet/FullyAutomatedBGPfabric/raw/master/topoCICT.png "CICT topology") 
+*Note that servers are using Ubuntu 16.04.3 LTS  & spine/leaf are using Cumulus Linux 3.4.3 at this moment [01/07/2018]*
+
+
 
 ## How-to
 
