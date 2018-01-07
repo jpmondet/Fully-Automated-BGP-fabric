@@ -14,8 +14,7 @@ Of course, you can re-use this project in any Linux based platform/topology by c
 ## The topology
 Assuming you are playing with "[Cumulus In The Cloud/CITC](https://cumulusnetworks.com/products/cumulus-in-the-cloud/)" platform, you'll, maybe, have a hard time finding the actual interfaces used on the spines/leafs (I found it in the deployment source code of CITC) so here is the detailed physical topology : 
 
-*image to add here*
-
+![alt text](https://github.com/jpmondet/FullyAutomatedBGPfabric/raw/master/topoCICT.png "CICT topology")
 
 ## How-to
 
