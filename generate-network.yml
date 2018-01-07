@@ -13,17 +13,12 @@
         src: interfaces.j2
         dest: /etc/network/interfaces
 
-    - name: Up physical interfaces of servers
+    - name: Enabling physical interfaces of servers
       shell: ip addr flush dev "{{ item.0 }}" && ifup "{{ item.0 }}" --force
       when: "'servers' in group_names"
       ignore_errors: yes
       with_items: 
         - "{{ interfaces }}"
-
-    - name: Up loopback interfaces of servers
-      shell: ip addr flush dev lo:"{{ as }}" && ifup lo:"{{ as }}" --force
-      when: "'servers' in group_names"
-      ignore_errors: yes
 
     - name: Restart networking service
       service: 

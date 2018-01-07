@@ -12,9 +12,10 @@ This repository provides Ansible playbook and templates to deploy a fully L3 fab
 Of course, you can re-use this project in any Linux based platform/topology by customizing the **hosts** and **host_vars** files.
 
 ## The topology
-Assuming you are playing with "[Cumulus In The Cloud/CITC](https://cumulusnetworks.com/products/cumulus-in-the-cloud/)" platform, you'll, maybe, have a hard time finding the actual interfaces used on the spines/leafs (I found it in the deployment source code of CITC) so here is the detailed physical topology : 
+Assuming you are playing with "[Cumulus In The Cloud/CITC](https://cumulusnetworks.com/products/cumulus-in-the-cloud/)" platform, you'll maybe have a hard time finding the actual interfaces used on the spines/leafs (I had to look into the deployment source code of CITC).
+To save you some time, here is the detailed physical topology: 
 
-![alt text](https://github.com/jpmondet/FullyAutomatedBGPfabric/raw/master/topoCICT.png "CICT topology")
+![alt text](https://github.com/jpmondet/FullyAutomatedBGPfabric/raw/master/topoCICT.png "CICT topology") 
 
 ## How-to
 
@@ -30,7 +31,7 @@ cd FullyAutomatedBGPfabric
 ansible-playbook generate-network.yml -i hosts 
 ```
 
-And *Voila*, you can start to play with BGP ! :-)
+And *Voilà*, you can start to play with BGP ! :-)
 
 ### Options [/!\ For now Only IPv4 is supported]
   - Fully IPv4
