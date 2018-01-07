@@ -39,10 +39,12 @@ And *Voila*, you can start to play with BGP ! :-)
 
   - Fully IPv6
     By using the option `IPv6`, the playbook will activate **Link-Local** IPv6 addresses on interfaces and will negociate IPv6 Address Family during BGP sessions establishment.
+
 `ansible-playbook generate-network.yml -i hosts -e "option=IPv6"`
 
   - RFC 5549
     By using the option `RFC5549`, the playbook will activate **Link-Local** IPv6 addresses on interfaces and will negociate IPv**4** Address Family during BGP sessions establishment.
+
 `ansible-playbook generate-network.yml -i hosts -e "option=RFC5549"`
 
 
