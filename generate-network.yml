@@ -4,6 +4,10 @@
   become: true
 
   tasks:
+#
+#    - include_tasks: tasks/ipv4/interfaces.yml
+#      when: option is not defined
+
     - name: Add network interfaces
       template: 
         src: interfaces.j2

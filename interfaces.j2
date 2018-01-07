@@ -7,9 +7,13 @@ iface eth0 inet dhcp
 auto {{ int.name }} 
 iface {{ int.name }} inet static
     address {{ int.addr }}
-    netmask 255.255.255.254
+    netmask {{ int.mask }}
 
 {% endfor %}
+
+
+{# Becane Useless..
+
 {% if loopback is defined %}
 auto lo:{{ as }} 
 iface lo:{{ as }} inet static
@@ -18,6 +22,8 @@ iface lo:{{ as }} inet static
 
 {% endif %}
 
+#}
+
 {# note: 
     We could use dummy interfaces instead of loopbacks.
     
@@ -25,3 +31,4 @@ iface lo:{{ as }} inet static
     sudo ip add a 111.111.111.111/32 dev dummy0
     sudo ip link set dev dummy0 up
 #}
+

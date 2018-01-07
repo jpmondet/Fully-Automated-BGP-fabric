@@ -3,5 +3,5 @@
 interfaces: 
   - {name: eth1, addr: 10.3.3.1, mask: 31, up: true}
   - {name: eth2, addr: 10.4.3.1, mask: 31, up: true}
+  - {name: "lo:1", addr: 33.33.33.33, mask: 32, up: true}
 as: 3
-loopback: 33.33.33.33
