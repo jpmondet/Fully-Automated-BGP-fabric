@@ -4,12 +4,12 @@
     src: templates/interfaces.j2
     dest: /etc/network/interfaces
 
-- name: Enabling interfaces on servers
-  shell: ip addr flush dev "{{ item.name }}" && ifup "{{ item.name }}" --force
-  when: "'servers' in group_names"
-  ignore_errors: yes
-  with_items: 
-    - "{{ interfaces }}"
+#- name: Enabling interfaces on servers
+#  shell: ip addr flush dev "{{ item.name }}" && ifup "{{ item.name }}" --force
+#  when: "'servers' in group_names"
+#  ignore_errors: yes
+#  with_items: 
+#    - "{{ interfaces }}"
 
 - name: Restart networking service
   service: 
