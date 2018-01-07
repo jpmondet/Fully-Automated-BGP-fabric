@@ -11,6 +11,7 @@
 #      when: option == '5549'
 
     - include_tasks: tasks/install_frr_servers.yml
+      when: "'servers' in group_names"
 
     - name: Activating bgp + zebra daemons
       template: 
