@@ -18,9 +18,9 @@ router bgp {{ as }}
 {% endif -%}
 {% if option is defined  or ansible_fqdn not in groups['spines']  -%}
   {% for int in interfaces -%}
-    {% if int.up -%}
+{#    {% if int.up -%} #}
  neighbor {{ int.name }} interface remote-as external 
-    {% endif -%}
+{#    {% endif -%} #}
   {% endfor -%}
 {% endif -%}
 {% if ansible_fqdn in groups['servers'] -%}
@@ -35,8 +35,12 @@ router bgp {{ as }}
 {% endif -%}
 bgp best as-pa mul
 {% if option is defined and option == "ipv6" -%}
+no bgp default ipv4-unicast
 ad ipv6
-maximum 10
+maximum 10  
+  {% for int in interfaces -%}
+ neighbor {{ int.name }} activate
+  {% endfor -%}
 {% else -%}
 ad ipv4
 maximum 10

@@ -19,7 +19,7 @@ iface {{ int.name }} inet static
     address {{ int.addr }}
     netmask {{ int.mask }}
   {% elif int.addr is defined and option is defined -%}
-iface {{ int.name }} inet manual
+{# iface {{ int.name }} inet manual #}
   {% endif -%}
   {% if int.addrv6 is defined -%}
 iface {{ int.name }} inet6 static
@@ -34,6 +34,7 @@ doesn't support "inet6 auto" (that's why there is a weird "if" statement matchin
 
 #}
 iface {{ int.name }} {% if "swp" not in int.name %} inet6 auto {% endif %}
+
   {% endif -%}
 {% endfor -%}
 
