@@ -9,20 +9,14 @@ service integrated-vtysh-config
 log syslog informational
 !
 router bgp {{ as }}
-{% if ansible_fqdn in groups['spines'] or ansible_fqdn in groups['leafs'] -%}
- neighbor DOWNSTREAM peer-group
- neighbor DOWNSTREAM remote-as external
-  {% if option is not defined -%}
- bgp listen range 10.{{ range }}.0.0/16 peer-group DOWNSTREAM
+{% for int in interfaces -%}
+  {% if int.peering_link -%}
+  neighbor {{ int.name }} interface remote-as external
+    {% if option is defined and option == "5549" -%}
+  neighbor {{ int.name }} capability extended-nexthop
+    {% endif -%}
   {% endif -%}
-{% endif -%}
-{% if option is defined  or ansible_fqdn not in groups['spines']  -%}
-  {% for int in interfaces -%}
-{#    {% if int.up -%} #}
- neighbor {{ int.name }} interface remote-as external 
-{#    {% endif -%} #}
-  {% endfor -%}
-{% endif -%}
+{% endfor -%}
 {% if ansible_fqdn in groups['servers'] -%}
   {% if option is defined and option == "ipv6" -%}
  ad ipv6
@@ -31,7 +25,6 @@ router bgp {{ as }}
  ad ipv4
    redistribute connected
   {% endif -%}
-
 {% endif -%}
 bgp best as-pa mul
 {% if option is defined and option == "ipv6" -%}

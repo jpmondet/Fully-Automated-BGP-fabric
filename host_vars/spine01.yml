@@ -1,8 +1,8 @@
 ---
 interfaces: 
-  - {name: swp1, addr: 10.10.10.0, mask: 31, up: false}
-  - {name: swp2, addr: 10.10.20.0, mask: 31, up: false}
-  - {name: swp3, addr: 10.10.30.0, mask: 31, up: false}
-  - {name: swp4, addr: 10.10.40.0, mask: 31, up: false}
+  - {name: swp1, addr: 10.10.10.0, mask: 31, peering_link: true}
+  - {name: swp2, addr: 10.10.20.0, mask: 31, peering_link: true}
+  - {name: swp3, addr: 10.10.30.0, mask: 31, peering_link: true}
+  - {name: swp4, addr: 10.10.40.0, mask: 31, peering_link: true}
 as: 65001
 range: 10

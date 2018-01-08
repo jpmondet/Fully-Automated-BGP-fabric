@@ -6,7 +6,6 @@
 
 - name: Flushing previous configurations
   shell: ip addr flush dev "{{ item.name }}" && ifup "{{ item.name }}" --force
-  ignore_errors: yes
   with_items: 
     - "{{ interfaces }}"
 
