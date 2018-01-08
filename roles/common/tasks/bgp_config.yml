@@ -8,4 +8,4 @@
   template: 
     src: bgp.j2
     dest: /etc/frr/frr.conf
-  notify: "Restart FRR"
+  notify: Restart frr service

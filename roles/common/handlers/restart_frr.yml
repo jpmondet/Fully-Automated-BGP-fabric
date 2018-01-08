@@ -3,4 +3,3 @@
   service: 
     name: frr
     state: restarted
-  listen: "Restart FRR"
