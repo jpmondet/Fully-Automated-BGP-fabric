@@ -1,0 +1,2 @@
+---
+- include_tasks: install_frr_servers.yml

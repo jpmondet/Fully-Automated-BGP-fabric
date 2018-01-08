@@ -6,4 +6,3 @@ interfaces:
   - {name: swp3, addr: 10.20.30.0, mask: 31, peering_link: true}
   - {name: swp4, addr: 10.20.40.0, mask: 31, peering_link: true}
 as: 65002
-range: 20

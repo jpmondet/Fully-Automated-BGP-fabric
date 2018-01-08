@@ -1,0 +1,5 @@
+---
+- name: General file
+  become: true
+  import_playbook: fabric.yml
+  import_playbook: servers.yml

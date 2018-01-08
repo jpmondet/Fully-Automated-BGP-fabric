@@ -8,8 +8,3 @@
   template: 
     src: templates/bgp.j2
     dest: /etc/frr/frr.conf
-
-- name: Restart frr service
-  service: 
-    name: frr
-    state: restarted

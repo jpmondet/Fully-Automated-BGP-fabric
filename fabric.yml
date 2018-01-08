@@ -1,0 +1,4 @@
+---
+hosts: fabric
+  - roles: 
+    common
