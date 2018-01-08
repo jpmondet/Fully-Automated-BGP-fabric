@@ -3,5 +3,5 @@
 interfaces: 
   - {name: eth1, addr: 10.1.2.1, mask: 31, peering_link: true}
   - {name: eth2, addr: 10.2.2.1, mask: 31, peering_link: true}
-  - {name: "lo:1", addr: 22.22.22.22, mask: 32, peering_link: true}
+  - {name: "lo:1", addr: 22.22.22.22, mask: 32, peering_link: false}
 as: 2
