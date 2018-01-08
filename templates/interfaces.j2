@@ -1,21 +1,26 @@
+#jinja2:lstrip_blocks: True
+#jinja2:trim_blocks: True
 auto lo
 iface lo inet loopback
 auto eth0
 iface eth0 inet dhcp
 
+
 {% for int in interfaces -%}
 auto {{ int.name }}
-  {% if addr is defined and option is not defined -%}
+  {% if int.addr is defined and option is not defined -%}
 iface {{ int.name }} inet static
     address {{ int.addr }}
     netmask {{ int.mask }}
-  {% elif addr is defined and option is defined -%}
+  {% elif int.addr is defined and option is defined -%}
 iface {{ int.name }} inet manual
   {% endif -%}
-  {% if addrv6 is defined -%}
+  {% if int.addrv6 is defined -%}
 iface {{ int.name }} inet6 static
     address {{ int.addrv6 }}
     netmask {{ int.maskv6 }}
+  {% if int.addrv6 is not defined and option is defined -%}
+iface {{ int.name }} inet6 auto
   {% endif -%}
 {% endfor -%}
 
