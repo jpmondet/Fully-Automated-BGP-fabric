@@ -3,3 +3,4 @@
   service: 
     name: networking
     state: restarted
+  listen: "Restart Networking"

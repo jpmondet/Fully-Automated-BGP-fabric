@@ -1,4 +1,5 @@
 ---
-hosts: fabric
-  - roles: 
-    common
+- hosts: fabric
+  become: True
+  roles:
+    - common

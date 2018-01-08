@@ -17,7 +17,7 @@ router bgp {{ as }}
     {% endif -%}
   {% endif -%}
 {% endfor -%}
-{% if ansible_fqdn in groups['servers'] -%}
+{% if inventory_hostname in groups['servers'] -%}
   {% if option is defined and option == "ipv6" -%}
  ad ipv6
    redistribute connected
@@ -32,7 +32,9 @@ no bgp default ipv4-unicast
 ad ipv6
 maximum 10  
   {% for int in interfaces -%}
+    {% if int.peering_link -%}
  neighbor {{ int.name }} activate
+    {% endif -%}
   {% endfor -%}
 {% else -%}
 ad ipv4

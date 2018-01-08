@@ -1,10 +1,11 @@
 ---
 - name: Add network interfaces
   template: 
-    src: templates/interfaces.j2
+    src: interfaces.j2
     dest: /etc/network/interfaces
 
 - name: Flushing previous configurations
   shell: ip addr flush dev "{{ item.name }}" && ifup "{{ item.name }}" --force
   with_items: 
     - "{{ interfaces }}"
+  notify: "Restart Networking"
