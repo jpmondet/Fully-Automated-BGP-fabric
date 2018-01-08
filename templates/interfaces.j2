@@ -5,21 +5,16 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet dhcp
 
-{#
-
-We have to do things differently if we are using IPv6 because CumulusLinux interfaces ("swp") 
-doesn't support "inet6"... 
-
-#}
-
 {% for int in interfaces -%}
 auto {{ int.name }}
   {% if int.addr is defined and option is not defined -%}
 iface {{ int.name }} inet static
     address {{ int.addr }}
     netmask {{ int.mask }}
-  {% elif int.addr is defined and option is defined -%}
-{# iface {{ int.name }} inet manual #}
+  {% elif int.addr is defined and option is defined and not int.peering_link -%}
+iface {{ int.name }} inet static
+    address {{ int.addr }}
+    netmask {{ int.mask }}
   {% endif -%}
   {% if int.addrv6 is defined -%}
 iface {{ int.name }} inet6 static
@@ -37,25 +32,3 @@ iface {{ int.name }} {% if "swp" not in int.name %} inet6 auto {% endif %}
 
   {% endif -%}
 {% endfor -%}
-
-
-{# Becane Useless..
-
-{% if loopback is defined %}
-auto lo:{{ as }} 
-iface lo:{{ as }} inet static
-    address {{ loopback }}
-    netmask 255.255.255.255
-
-{% endif %}
-
-#}
-
-{# note: 
-    We could use dummy interfaces instead of loopbacks.
-    
-    sudo ip link add name dummy0 type dummy
-    sudo ip add a 111.111.111.111/32 dev dummy0
-    sudo ip link set dev dummy0 up
-#}
-

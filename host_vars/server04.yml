@@ -1,7 +1,7 @@
 ---
 
 interfaces: 
-  - {name: eth1, addr: 10.3.4.1, mask: 31, up: true}
-  - {name: eth2, addr: 10.4.4.1, mask: 31, up: true}
-  - {name: "lo:1", addr: 44.44.44.44, mask: 32, up: true}
+  - {name: eth1, addr: 10.3.4.1, mask: 31, peering_link: true}
+  - {name: eth2, addr: 10.4.4.1, mask: 31, peering_link: true}
+  - {name: "lo:1", addr: 44.44.44.44, mask: 32, peering_link: true}
 as: 4
