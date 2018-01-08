@@ -16,7 +16,7 @@ router bgp {{ as }}
  bgp listen range 10.{{ range }}.0.0/16 peer-group DOWNSTREAM
   {% endif -%}
 {% endif -%}
-{% if ansible_fqdn not in groups['spines'] or option is defined -%}
+{% if option is defined  or ansible_fqdn not in groups['spines']  -%}
   {% for int in interfaces -%}
     {% if int.up -%}
  neighbor {{ int.name }} interface remote-as external 
@@ -24,7 +24,7 @@ router bgp {{ as }}
   {% endfor -%}
 {% endif -%}
 {% if ansible_fqdn in groups['servers'] -%}
-  {% if option == "ipv6" -%}
+  {% if option is defined and option == "ipv6" -%}
  ad ipv6
    redistribute connected
   {% else -%}
@@ -34,7 +34,7 @@ router bgp {{ as }}
 
 {% endif -%}
 bgp best as-pa mul
-{% if option == "ipv6" -%}
+{% if option is defined and option == "ipv6" -%}
 ad ipv6
 maximum 10
 {% else -%}

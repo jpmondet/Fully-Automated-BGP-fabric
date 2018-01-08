@@ -5,6 +5,12 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet dhcp
 
+{#
+
+We have to do things differently if we are using IPv6 because CumulusLinux interfaces ("swp") 
+doesn't support "inet6"... 
+
+#}
 
 {% for int in interfaces -%}
 auto {{ int.name }}
@@ -19,8 +25,15 @@ iface {{ int.name }} inet manual
 iface {{ int.name }} inet6 static
     address {{ int.addrv6 }}
     netmask {{ int.maskv6 }}
+  {% endif -%}
   {% if int.addrv6 is not defined and option is defined -%}
-iface {{ int.name }} inet6 auto
+{#
+
+We have to do things differently if we are using IPv6 because Cumulus Linux interfaces ("swp") 
+doesn't support "inet6 auto" (that's why there is a weird "if" statement matching on "swp"...) 
+
+#}
+iface {{ int.name }} {% if "swp" not in int.name %} inet6 auto {% endif %}
   {% endif -%}
 {% endfor -%}
 
