@@ -1,3 +1,0 @@
----
-- include_tasks: restart_networking.yml 
-- include_tasks: restart_frr.yml  

@@ -27,10 +27,10 @@ git clone https://github.com/jpmondet/FullyAutomatedBGPfabric.git
 cd FullyAutomatedBGPfabric
 ```
 ```bash
-ansible-playbook site.yml 
+ansible-playbook deploy_network.yml 
 ```
 
-And *Voilà*, you can start to play with BGP ! :-)
+And *Voilà*, you can start to play with BGP and your new network ! :-)
 
 ### Options 
 
@@ -43,7 +43,7 @@ And *Voilà*, you can start to play with BGP ! :-)
     By using the option `IPv6`, the playbook will activate **Link-Local** IPv6 addresses on interfaces and will negociate IPv6 Address Family during BGP sessions establishment.
 
 ```bash
-ansible-playbook site.yml -e "option=ipv6"
+ansible-playbook deploy_network.yml -e "option=ipv6"
 ```
 
   - **RFC 5549**
@@ -51,7 +51,7 @@ ansible-playbook site.yml -e "option=ipv6"
     By using the option `RFC5549`, the playbook will activate **Link-Local** IPv6 addresses on interfaces and will negociate IPv**4** Address Family during BGP sessions establishment.
 
 ```bash
-`ansible-playbook site.yml -e "option=5549"`
+`ansible-playbook deploy_network.yml -e "option=5549"`
 ```
 
 

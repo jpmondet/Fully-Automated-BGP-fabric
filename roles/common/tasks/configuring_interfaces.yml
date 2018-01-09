@@ -8,4 +8,8 @@
   shell: ip addr flush dev "{{ item.name }}" && ifup "{{ item.name }}" --force
   with_items: 
     - "{{ interfaces }}"
-  notify: Restart networking service
+
+- name: Restart networking service
+  service: 
+    name: networking
+    state: restarted
