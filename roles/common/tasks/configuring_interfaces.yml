@@ -1,7 +1,7 @@
 ---
 - name: Add network interfaces
   template: 
-    src: templates/interfaces.j2
+    src: interfaces.j2
     dest: /etc/network/interfaces
 
 - name: Flushing previous configurations

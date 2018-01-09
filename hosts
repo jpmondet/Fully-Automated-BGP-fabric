@@ -5,5 +5,9 @@ spine02
 [leafs]
 leaf0[1:4]
 
+[fabric:children]
+spines
+leafs
+
 [servers]
 server0[1:4]

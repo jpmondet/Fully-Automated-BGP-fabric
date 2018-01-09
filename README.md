@@ -1,10 +1,5 @@
 # Fully L3 & Automated BGP fabric
 
-
-*Work in progress...*
-
-
-
 ## Introduction 
 
 This repository provides Ansible playbook and templates to deploy a fully L3 fabric based on BGP (using [FreeRangeRouting](https://github.com/FRRouting/frr)) on the free test Lab "[Cumulus In The Cloud](https://cumulusnetworks.com/products/cumulus-in-the-cloud/)" platform.
@@ -32,10 +27,10 @@ git clone https://github.com/jpmondet/FullyAutomatedBGPfabric.git
 cd FullyAutomatedBGPfabric
 ```
 ```bash
-ansible-playbook generate-network.yml -i hosts 
+ansible-playbook deploy_network.yml 
 ```
 
-And *Voilà*, you can start to play with BGP ! :-)
+And *Voilà*, you can start to play with BGP and your new network ! :-)
 
 ### Options 
 
@@ -48,7 +43,7 @@ And *Voilà*, you can start to play with BGP ! :-)
     By using the option `IPv6`, the playbook will activate **Link-Local** IPv6 addresses on interfaces and will negociate IPv6 Address Family during BGP sessions establishment.
 
 ```bash
-ansible-playbook generate-network.yml -i hosts -e "option=ipv6"
+ansible-playbook deploy_network.yml -e "option=ipv6"
 ```
 
   - **RFC 5549**
@@ -56,7 +51,7 @@ ansible-playbook generate-network.yml -i hosts -e "option=ipv6"
     By using the option `RFC5549`, the playbook will activate **Link-Local** IPv6 addresses on interfaces and will negociate IPv**4** Address Family during BGP sessions establishment.
 
 ```bash
-`ansible-playbook generate-network.yml -i hosts -e "option=5549"`
+`ansible-playbook deploy_network.yml -e "option=5549"`
 ```
 
 
