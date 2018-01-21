@@ -32,3 +32,11 @@ iface {{ int.name }} {% if "swp" not in int.name %} inet6 auto {% endif %}
 
   {% endif -%}
 {% endfor -%}
+
+# Lil' hack (temporary) : 
+# Reinforce 127.0.0.1 as I was a bit too hard when flushing all interfaces ;-)
+# This need to be corrected in the tasks 'configuring_interfaces.yaml'
+auto lo:0
+iface lo:0 inet static
+    address 127.0.0.1
+    netmask 32
