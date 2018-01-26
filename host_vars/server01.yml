@@ -4,4 +4,3 @@ interfaces:
   - {name: eth2, addr: 10.2.1.1, mask: 31, peering_link: true}
   - {name: "lo:1", addr: 11.11.11.11, mask: 32, addrv6: "2001::1", maskv6: 64, peering_link: false}
 as: 1 # BGP AS
-k8s_master: true # Will be used in the future...
