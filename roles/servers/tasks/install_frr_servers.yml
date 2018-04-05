@@ -1,7 +1,15 @@
 ---
+#- name: Get keys of cumulus repo  
+#  apt_key:
+#    url: https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey
+#    state: present
+#  when: "'servers' in group_names"
+
+# Ok the process changed yesterday : https://support.cumulusnetworks.com/hc/en-us/articles/360002663013
 - name: Get keys of cumulus repo  
   apt_key:
-    url: https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey
+    keyserver: keys.gnupg.net
+    id: A88BBC95
     state: present
   when: "'servers' in group_names"
 
