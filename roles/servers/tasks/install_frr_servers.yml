@@ -11,6 +11,8 @@
 
 - name: Apt update/upgrade
   apt:
+    allow_unauthenticated: yes
+    force: yes
     update_cache: yes
   when: "'servers' in group_names"
 
