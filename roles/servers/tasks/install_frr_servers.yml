@@ -1,7 +1,7 @@
 ---
 - name: Get FRR
   get_url:
-    url: {{ item }}
+    url: "{{ item }}"
     dest: /tmp/
   with_items: 
     - https://github.com/FRRouting/frr/releases/download/frr-6.0/frr_6.0-1.ubuntu16.04+1_amd64.deb
@@ -12,7 +12,7 @@
 
 - name: Install dependencies
   apt:
-    name: {{ item }}
+    name: "{{ item }}"
   with_items:
     - libc-ares2
     - libsensors4
@@ -23,7 +23,7 @@
 
 - name: Install FRR
   apt:
-    deb: /tmp/{{ item }}
+    deb: "/tmp/{{ item }}"
   with_items:
     - frr_6.0-1.ubuntu16.04+1_amd64.deb
     - frr-pythontools_6.0-1.ubuntu16.04+1_all.deb
