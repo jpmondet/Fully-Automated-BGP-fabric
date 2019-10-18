@@ -1,6 +1,7 @@
 ---
 - hosts: servers
   become: True
+  gather_facts: True
   roles:
     - servers
     - common

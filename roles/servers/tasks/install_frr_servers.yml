@@ -1,8 +1,8 @@
 ---
-- name: Get facts about the servers to have access to ansible_distribution_release
-  setup:
-    filter:
-      - "ansible_distribution_release"
+#- name: Get facts about the servers to have access to ansible_distribution_release
+#  setup:
+#    filter:
+#      - "ansible_distribution_release"
 
 #- name: Get FRR
 #  get_url:
