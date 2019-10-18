@@ -1,14 +1,14 @@
 ---
-- name: Get FRR
-  get_url:
-    url: "{{ item }}"
-    dest: /tmp/
-  with_items: 
-    - https://github.com/FRRouting/frr/releases/download/frr-6.0/frr_6.0-1.ubuntu16.04+1_amd64.deb
-    - https://github.com/FRRouting/frr/releases/download/frr-6.0/frr-pythontools_6.0-1.ubuntu16.04+1_all.deb
-      #- https://github.com/FRRouting/frr/releases/download/frr-6.0/frr_6.0-1.ubuntu18.04+1_amd64.deb
-      #- https://github.com/FRRouting/frr/releases/download/frr-6.0/frr-pythontools_6.0-1.ubuntu18.04+1_all.deb
-  when: "'servers' in group_names"
+#- name: Get FRR
+#  get_url:
+#    url: "{{ item }}"
+#    dest: /tmp/
+#  with_items: 
+#    - https://github.com/FRRouting/frr/releases/download/frr-6.0/frr_6.0-1.ubuntu16.04+1_amd64.deb
+#    - https://github.com/FRRouting/frr/releases/download/frr-6.0/frr-pythontools_6.0-1.ubuntu16.04+1_all.deb
+#      #- https://github.com/FRRouting/frr/releases/download/frr-6.0/frr_6.0-1.ubuntu18.04+1_amd64.deb
+#      #- https://github.com/FRRouting/frr/releases/download/frr-6.0/frr-pythontools_6.0-1.ubuntu18.04+1_all.deb
+#  when: "'servers' in group_names"
 
 - name: Install dependencies
   apt:
@@ -21,10 +21,29 @@
     - python-ipaddr
   when: "'servers' in group_names"
 
-- name: Install FRR
+  #- name: Install FRR
+  #  apt:
+  #    deb: "/tmp/{{ item }}"
+  #  with_items:
+  #    - frr_6.0-1.ubuntu16.04+1_amd64.deb
+  #    - frr-pythontools_6.0-1.ubuntu16.04+1_all.deb
+  #  when: "'servers' in group_names"
+
+# New way to install now that FRR has deb repo
+- name: Add an FRR repo signing key
+  apt_key:
+    url: https://deb.frrouting.org/frr/keys.asc
+    state: present
+
+- name: Add the FRR repo
+  apt_repository:
+    repo: "deb https://deb.frrouting.org/frr {{ ansible_distribution_release }} frr-stable"
+    state: present
+
+- name: Actually install FRR from the repo
   apt:
-    deb: "/tmp/{{ item }}"
+    name: "{{ item }}"
+    update_cache: yes
   with_items:
-    - frr_6.0-1.ubuntu16.04+1_amd64.deb
-    - frr-pythontools_6.0-1.ubuntu16.04+1_all.deb
-  when: "'servers' in group_names"
+    - frr
+    - frr-pythontools
