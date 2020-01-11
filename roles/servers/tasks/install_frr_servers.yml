@@ -17,13 +17,13 @@
 
 - name: Install dependencies
   apt:
-    name: "{{ item }}"
-  with_items:
-    - libc-ares2
-    - libsensors4
-    - libsnmp-base 
-    - libsnmp30
-    - python-ipaddr
+    pkg:
+      - libc-ares2
+      - libsensors4
+      - libsnmp-base 
+      - libsnmp30
+      - python-ipaddr
+    state: present
   when: "'servers' in group_names"
 
   #- name: Install FRR
@@ -47,8 +47,7 @@
 
 - name: Actually install FRR from the repo
   apt:
-    name: "{{ item }}"
     update_cache: yes
-  with_items:
-    - frr
-    - frr-pythontools
+    pkg:
+      - frr
+      - frr-pythontools
