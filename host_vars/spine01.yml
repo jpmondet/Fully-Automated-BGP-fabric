@@ -4,4 +4,6 @@ interfaces:
   - {name: swp2, addr: 10.10.20.0, mask: 31, peering_link: true}
   - {name: swp3, addr: 10.10.30.0, mask: 31, peering_link: true}
   - {name: swp4, addr: 10.10.40.0, mask: 31, peering_link: true}
+  - {name: swp5, addr: 10.10.50.0, mask: 31, peering_link: true}
+  - {name: swp6, addr: 10.10.60.0, mask: 31, peering_link: true}
 as: 65001

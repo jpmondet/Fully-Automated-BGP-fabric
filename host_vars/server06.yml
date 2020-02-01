@@ -1,0 +1,6 @@
+---
+interfaces: 
+  - {name: eth1, addr: 10.3.6.1, mask: 31, peering_link: true}
+  - {name: eth2, addr: 10.4.6.1, mask: 31, peering_link: true}
+  - {name: "lo:1", addr: 66.66.66.66, mask: 32, addrv6: "2001:6::1", maskv6: 64, peering_link: false}
+as: 6
