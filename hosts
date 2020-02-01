@@ -1,13 +1,19 @@
 [spines]
 spine01
 spine02
+spine03
+spine04
 
 [leafs]
 leaf0[1:4]
+border01
+border02
+fw1
+fw2
 
 [fabric:children]
 spines
 leafs
 
 [servers]
-server0[1:4]
+server0[1:8]
