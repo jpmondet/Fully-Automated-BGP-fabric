@@ -8,9 +8,12 @@
   shell: ip addr flush dev "{{ item.name }}" && ifup "{{ item.name }}" --force
   with_items: 
     - "{{ interfaces }}"
+  ignore_errors: yes
 
 - name: Restart networking service
   service: 
     name: networking
     state: restarted
-  ignore_errors: yes
+
+- name: In case of unreachables because of network restart, we flush the unreachable state
+  meta: clear_host_errors
