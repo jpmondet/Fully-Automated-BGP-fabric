@@ -4,7 +4,7 @@ interfaces:
   - {name: swp1, addr: 10.5.7.0, mask: 31, peering_link: true}
   - {name: swp2, addr: 10.5.8.0, mask: 31, peering_link: true}
   - {name: swp3, addr: 10.5.9.0, mask: 31, peering_link: true}
-  - {name: swp3, addr: 10.5.10.0, mask: 31, peering_link: true}
+  - {name: swp4, addr: 10.5.10.0, mask: 31, peering_link: true}
   - {name: swp51, addr: 10.10.50.1, mask: 31, peering_link: true}
   - {name: swp52, addr: 10.20.50.1, mask: 31, peering_link: true}
   - {name: swp53, addr: 10.30.50.1, mask: 31, peering_link: true}

@@ -17,7 +17,7 @@ router bgp {{ as }}
     {% endif -%}
   {% endif -%}
 {% endfor -%}
-{% if inventory_hostname in groups['servers'] -%}
+{% if inventory_hostname in groups['servers'] or 'fw' in inventory_hostname -%}
   {% if option is defined and option == "ipv6" -%}
  ad ipv6
    redistribute connected
