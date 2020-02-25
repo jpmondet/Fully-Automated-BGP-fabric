@@ -10,7 +10,7 @@ Of course, you can re-use this project in any Linux based platform/topology by c
 Assuming you are playing with "[Cumulus In The Cloud/CITC](https://cumulusnetworks.com/products/cumulus-in-the-cloud/)" platform, ~~you'll maybe have a hard time finding the actual interfaces used on the spines/leafs (I had to look into the deployment source code of CITC).~~
 ~~To save you some time, here is the detailed physical topology:~~, you'll find the following diagram (provided by Cumulus) when launching the simulation (This is new since the beginning of 2020) :
 
-![alt text](https://github.com/jpmondet/FullyAutomatedBGPfabric/raw/master/new_citc_topo.svg "CITC topology") 
+![alt text](https://github.com/jpmondet/FullyAutomatedBGPfabric/raw/master/new_citc_topo.jpg "CITC topology") 
 
 
 *Note that servers are using **Ubuntu 18.04.3 LTS**  & spine/leaf are using **Cumulus Linux 3.7.8** at this moment [02/02/2020]*
