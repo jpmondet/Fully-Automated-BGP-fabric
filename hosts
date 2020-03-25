@@ -17,3 +17,12 @@ leafs
 
 [servers]
 server0[1:8]
+
+[fabric:vars]
+ansible_python_interpreter=/usr/bin/python2
+
+[servers:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+
+
