@@ -14,6 +14,5 @@
   service: 
     name: networking
     state: restarted
+    sleep: 3 # This sleep is a workaround because ansible drop the connection when network is restarted sometimes... (see here : https://docs.ansible.com/ansible/latest/modules/service_module.html)
 
-- name: In case of unreachables because of network restart, we flush the unreachable state
-  meta: clear_host_errors
