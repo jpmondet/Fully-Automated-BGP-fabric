@@ -10,9 +10,18 @@
     - "{{ interfaces }}"
   ignore_errors: yes
 
+  #- name: Restart networking service
+  #  service: 
+  #    name: networking
+  #    state: restarted
+  #    sleep: 3 # This sleep is a workaround because ansible drop the connection when network is restarted sometimes... (see here : https://docs.ansible.com/ansible/latest/modules/service_module.html)
+
+  # /!\ Using Service module use systemd under the hood
+  # Systemd doesn't support sleep option so there is a chance that ansible drop the connection...
+  # As a workaround, we have to use a shell command that adds a sleep.
+  #
+
 - name: Restart networking service
-  service: 
-    name: networking
-    state: restarted
-    sleep: 3 # This sleep is a workaround because ansible drop the connection when network is restarted sometimes... (see here : https://docs.ansible.com/ansible/latest/modules/service_module.html)
+  shell:
+    cmd: "systemctl restart networking; sleep 3"
 
