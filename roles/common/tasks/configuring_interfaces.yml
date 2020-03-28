@@ -21,7 +21,12 @@
   # As a workaround, we have to use a shell command that adds a sleep.
   #
 
-- name: Restart networking service
+- name: Restart networking service [Linux servers]
   shell:
     cmd: "systemctl restart networking; sleep 3"
+  when: "'servers' in group_names"
 
+- name: Restart networking service [CumulusLinux devices]
+  shell:
+    cmd: "ifreload -a -X eth0"
+  when: "'fabric' in group_names"
