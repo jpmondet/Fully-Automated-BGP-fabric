@@ -30,7 +30,7 @@
   lineinfile:
     path: /etc/resolv.conf
     regexp: '^nameserver'
-    line: nameserver "{{ ansible_facts.dns.nameservers[0] }}"
+    line: nameserver {{ ansible_facts.eth0.ipv4.address.split('.')[:-1] | join('.') }}.1
 
 - name: Remove default CITC eth0 file
   file:
