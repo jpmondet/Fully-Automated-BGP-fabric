@@ -1,2 +1,17 @@
 ---
+
+- name: Remove default CITC eth0 file
+  file:
+    path: /etc/network/interfaces.d/eth0.cfg
+    state: absent
+
+- name: Kill dhclient
+  shell:
+    cmd: killall dhclient
+  ignore_errors: yes
+
+- name: Restart networking service
+  shell:
+    cmd: "systemctl restart networking ; sleep 3"
+
 - include_tasks: install_frr_servers.yml

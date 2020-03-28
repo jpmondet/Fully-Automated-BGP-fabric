@@ -3,7 +3,9 @@
 auto lo
 iface lo inet loopback
 auto eth0
-iface eth0 inet dhcp
+iface eth0 inet static
+    address {{ ansible_facts.eth0.ipv4.address }}
+    netmask {{ ansible_facts.eth0.ipv4.netmask }}
 
 {% for int in interfaces -%}
 auto {{ int.name }}
@@ -39,4 +41,9 @@ iface {{ int.name }} {% if "swp" not in int.name %} inet6 auto {% endif %}
 auto lo:0
 iface lo:0 inet static
     address 127.0.0.1
-    netmask 32
+    netmask 8
+
+
+post-up mkdir -p /home/cumulus/.ssh
+post-up wget -O /home/cumulus/.ssh/authorized_keys http://192.168.200.1/authorized_keys
+post-up chown -R cumulus:cumulus /home/cumulus/.ssh
