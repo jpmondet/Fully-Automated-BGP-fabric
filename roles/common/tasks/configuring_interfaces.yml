@@ -47,7 +47,17 @@
     cmd: "systemctl restart networking ; sleep 3"
   when: "'servers' in group_names"
 
-- name: Restart networking service [CumulusLinux devices]
-  shell:
-    cmd: "ifreload -a ; sleep 10"
+- name: Boucing ifaces [CumulusLinux]
+  shell: ifdown "{{ item.name }}" && ifup "{{ item.name }}" --force
+  with_items: 
+    - "{{ interfaces }}"
+  ignore_errors: yes
   when: "'fabric' in group_names"
+
+  #- name: Restart networking service [CumulusLinux devices]
+  #  shell:
+  #    cmd: "ifreload -a ; sleep 10"
+  #  when: "'fabric' in group_names"
+
+- name: Tries to resurrect dead hosts
+  meta: clear_host_errors
