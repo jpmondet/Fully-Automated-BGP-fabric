@@ -49,5 +49,5 @@
 
 - name: Restart networking service [CumulusLinux devices]
   shell:
-    cmd: "ifreload -a ; sleep 3"
+    cmd: "ifreload -a ; sleep 10"
   when: "'fabric' in group_names"

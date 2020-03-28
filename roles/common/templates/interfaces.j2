@@ -42,8 +42,3 @@ auto lo:0
 iface lo:0 inet static
     address 127.0.0.1
     netmask 8
-
-
-post-up mkdir -p /home/cumulus/.ssh
-post-up wget -O /home/cumulus/.ssh/authorized_keys http://192.168.200.1/authorized_keys
-post-up chown -R cumulus:cumulus /home/cumulus/.ssh
