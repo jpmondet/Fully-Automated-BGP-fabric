@@ -32,12 +32,22 @@
     regexp: '^nameserver'
     line: nameserver "{{ ansible_facts.dns.nameservers[0] }}"
 
-#- name: Restart networking service [Linux servers]
-#  shell:
-#    cmd: "systemctl restart networking ; sleep 3"
-#  when: "'servers' in group_names"
+- name: Remove default CITC eth0 file
+  file:
+    path: /etc/network/interfaces.d/eth0.cfg
+    state: absent
+
+- name: Kill dhclient
+  shell:
+    cmd: killall dhclient
+  ignore_errors: yes
+
+- name: Restart networking service [Linux servers]
+  shell:
+    cmd: "systemctl restart networking ; sleep 3"
+  when: "'servers' in group_names"
 
 - name: Restart networking service [CumulusLinux devices]
   shell:
-    cmd: "ifreload -a -X eth0 ; sleep 3"
+    cmd: "ifreload -a ; sleep 3"
   when: "'fabric' in group_names"
