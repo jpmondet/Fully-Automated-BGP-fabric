@@ -6,6 +6,14 @@ auto eth0
 iface eth0 inet static
     address {{ ansible_facts.eth0.ipv4.address }}
     netmask {{ ansible_facts.eth0.ipv4.netmask }}
+    broadcast {{ ansible_facts.eth0.ipv4.broadcast | default("192.168.200.255") }}
+{% if inventory_hostname in groups['fabric'] -%}
+    {# Cumulus is now using a vrf for mgmt #}
+    vrf mgmt
+iface mgmt
+    address 127.0.0.1/8
+    vrf-table auto
+{% endif -%}
 
 {% for int in interfaces -%}
 auto {{ int.name }}
@@ -35,10 +43,9 @@ iface {{ int.name }} {% if "swp" not in int.name %} inet6 auto {% endif %}
   {% endif -%}
 {% endfor -%}
 
-# Lil' hack (temporary) : 
-# Reinforce 127.0.0.1 as I was a bit too hard when flushing all interfaces ;-)
-# This need to be corrected in the tasks 'configuring_interfaces.yaml'
+{% if ansible_facts.distribution != "Cumulus Linux" -%}
 auto lo:0
 iface lo:0 inet static
     address 127.0.0.1
     netmask 8
+{% endif -%}
