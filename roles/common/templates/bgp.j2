@@ -9,6 +9,7 @@ service integrated-vtysh-config
 log syslog informational
 !
 router bgp {{ as }}
+bgp router-id {{ ansible_facts.eth0.ipv4.address }}
 {% for int in interfaces -%}
   {% if int.peering_link -%}
   neighbor {{ int.name }} interface remote-as external
