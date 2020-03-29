@@ -16,7 +16,9 @@ iface mgmt
 {% endif -%}
 
 {% for int in interfaces -%}
+{% if int.name != 'lo' -%}
 auto {{ int.name }}
+{% endif %}
   {% if int.addr is defined and option is not defined -%}
 iface {{ int.name }} inet static
     address {{ int.addr }}

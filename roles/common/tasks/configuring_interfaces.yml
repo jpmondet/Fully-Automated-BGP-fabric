@@ -47,7 +47,7 @@
     cmd: "systemctl restart networking ; sleep 3"
   when: "'servers' in group_names"
 
-- name: Boucing ifaces [CumulusLinux]
+- name: Bouncing ifaces [CumulusLinux]
   shell: ifdown "{{ item.name }}" && ifup "{{ item.name }}" --force
   with_items: 
     - "{{ interfaces }}"
