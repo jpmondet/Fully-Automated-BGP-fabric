@@ -41,6 +41,11 @@
     url: https://deb.frrouting.org/frr/keys.asc
     state: present
 
+- name: Disable netq repo since it doesn't support i386 anymore
+  apt_repository:
+    repo: "deb http://apps3.cumulusnetworks.com/repos/deb bionic netq-latest"
+    state: absent
+
 - name: Add the FRR repo
   apt_repository:
     repo: "deb https://deb.frrouting.org/frr {{ ansible_distribution_release }} frr-stable"
