@@ -5,7 +5,7 @@
 
 - name: append all known IPv4 addresses from the group network
   set_fact:
-    ips: "{{ ips + hostvars[item].ansible_all_ipv4_addresses }}"
+    ips: "{{ ips + hostvars[item].ansible_lo_1.ipv4.address }}"
   with_inventory_hostnames: servers
 
 - name: ping all IP addresses in ips
