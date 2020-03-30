@@ -1,3 +1,5 @@
 ---
 - include_tasks: configuring_interfaces.yml 
 - include_tasks: bgp_config.yml
+- include_tasks: validate.yml
+  when: : "'servers' in group_names"

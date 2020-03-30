@@ -1,3 +1,2 @@
 ---
 - include_tasks: install_frr_servers.yml
-- include_tasks: validate.yml
