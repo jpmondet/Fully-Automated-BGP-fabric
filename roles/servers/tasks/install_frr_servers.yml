@@ -21,8 +21,10 @@
   ignore_errors: yes
 
 - name: Restart networking service [Linux servers]
-  shell:
-    cmd: "systemctl restart networking ; sleep 3"
+  shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force
+  with_items:
+    - "{{ interfaces }}"
+  ignore_errors: yes
 
 - name: Install dependencies
   apt:
