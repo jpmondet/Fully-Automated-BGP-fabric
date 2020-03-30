@@ -42,17 +42,11 @@
     cmd: killall dhclient
   ignore_errors: yes
 
-- name: Restart networking service [Linux servers]
-  shell:
-    cmd: "systemctl restart networking ; sleep 3"
-  when: "'servers' in group_names"
-
-- name: Bouncing ifaces [CumulusLinux]
-  shell: ifdown "{{ item.name }}" && ifup "{{ item.name }}" --force
+- name: Bouncing ifaces
+  shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force
   with_items: 
     - "{{ interfaces }}"
   ignore_errors: yes
-  when: "'fabric' in group_names"
 
   #- name: Restart networking service [CumulusLinux devices]
   #  shell:
