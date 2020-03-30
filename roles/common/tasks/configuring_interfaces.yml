@@ -26,24 +26,15 @@
   # Systemd doesn't support sleep option so there is a chance that ansible drop the connection...
   # As a workaround, we have to use a shell command that adds a sleep.
   #
-- name: Kill dhclient
-  shell:
-    cmd: killall dhclient
-  ignore_errors: yes
 
-- name: Enforce DNS
-  lineinfile:
-    path: /etc/resolv.conf
-    regexp: '^nameserver'
-    line: nameserver {{ ansible_facts.eth0.ipv4.address.split('.')[:-1] | join('.') }}.1
-
-- name: Remove default CITC eth0 file
-  file:
-    path: /etc/network/interfaces.d/eth0.cfg
-    state: absent
+  #- name: Enforce DNS
+  #  lineinfile:
+  #    path: /etc/resolv.conf
+  #    regexp: '^nameserver'
+  #    line: nameserver {{ ansible_facts.eth0.ipv4.address.split('.')[:-1] | join('.') }}.1
 
 - name: Bouncing ifaces
-  shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force --no-scripts --ignore-errors
+  shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force --no-scripts
   with_items: 
     - "{{ interfaces }}"
   ignore_errors: yes
