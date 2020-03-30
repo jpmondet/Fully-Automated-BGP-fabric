@@ -9,6 +9,10 @@
     cmd: killall dhclient
   ignore_errors: yes
 
+- name: Disable systemd-resolved
+  shell:
+    cmd: systemctl stop systemd-resolved ; systemctl disable systemd-resolved
+
 - name: Enforce DNS
   lineinfile:
     path: /etc/resolv.conf
@@ -19,11 +23,6 @@
   file:
     path: /etc/network/interfaces.d/eth0.cfg
     state: absent
-- name: Restart networking service [Linux servers]
-  shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force --no-scripts --ignore-errors
-  with_items:
-    - "{{ interfaces }}"
-  ignore_errors: yes
 
 - name: Install dependencies
   apt:
