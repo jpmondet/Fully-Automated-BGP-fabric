@@ -1,3 +1,4 @@
 ---
 - import_playbook: fabric.yml
 - import_playbook: servers.yml
+  tags: srv

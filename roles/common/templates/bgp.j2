@@ -37,7 +37,6 @@ maximum 10
 {# SERVERS SPECIFICS #}
 
 {% if inventory_hostname in groups['servers'] or 'fw' in inventory_hostname -%}
-  {% if option is defined and option == "ipv6" -%}
   ad {% if option is defined and option == "ipv6" -%}ipv6{% else -%}ipv4{% endif -%}
     redistribute connected
     {% for int in interfaces -%}
