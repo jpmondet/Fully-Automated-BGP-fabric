@@ -1,0 +1,16 @@
+---
+- name: set an empty list named ips
+  set_fact:
+    ips: []
+
+- name: append all known IPv4 addresses from the group network
+  set_fact:
+    ips: "{{ ips + hostvars[item].ansible_all_ipv4_addresses }}"
+  with_inventory_hostnames: servers
+
+- name: ping all IP addresses in ips
+  shell: "ping {{ item }} -c 1"
+  with_items:
+    - "{{ ips }}"
+  register: result
+  changed_when: "result.rc != 0"
