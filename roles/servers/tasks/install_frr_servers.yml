@@ -4,6 +4,11 @@
 #    filter:
 #      - "ansible_distribution_release"
 
+- name: Kill dhclient
+  shell:
+    cmd: killall dhclient
+  ignore_errors: yes
+
 - name: Enforce DNS
   lineinfile:
     path: /etc/resolv.conf
@@ -14,14 +19,8 @@
   file:
     path: /etc/network/interfaces.d/eth0.cfg
     state: absent
-
-- name: Kill dhclient
-  shell:
-    cmd: killall dhclient
-  ignore_errors: yes
-
 - name: Restart networking service [Linux servers]
-  shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force
+  shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force --no-scripts --ignore-errors
   with_items:
     - "{{ interfaces }}"
   ignore_errors: yes
