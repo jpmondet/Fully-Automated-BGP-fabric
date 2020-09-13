@@ -34,7 +34,8 @@
   #    line: nameserver {{ ansible_facts.eth0.ipv4.address.split('.')[:-1] | join('.') }}.1
 
 - name: Bouncing ifaces
-  shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force --no-scripts
+  #shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force --no-scripts
+  shell: ifreload --allow=hotplug
   with_items: 
     - "{{ interfaces }}"
   ignore_errors: yes
