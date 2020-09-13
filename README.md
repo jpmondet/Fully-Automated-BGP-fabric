@@ -32,6 +32,18 @@ ansible-playbook deploy_network.yml
 
 And *Voilà*, you can start to play with BGP and your new network ! :-)
 
+
+**UPDATE 09/2020**: As of now, CITC doesn't provide directly an easy way to ssh from your computer to the `oob-mgmt-server`.  
+If you still prefer ssh from your computer instead of using ~~(horrible)~~ browser consoles, you have to:  
+* Connect first with the browser console to the `oob-mgmt-server`
+* It prompts you to change the password.
+* Then, 2 options : 
+  * On your computer, generate a public key and paste the public part in the `.ssh/id_rsa.pub` file on the `oob-mgmt-server`
+  * Or edit the `/etc/sshd_config` of the `oob-mgmt-server` and allow the `PasswordAuthentication`
+* After that, on your CITC dashboard, you have to add a new ssh service to `oob-mgmt-server:eth0` to get a generated remote port you can connect to from your computer.
+* Finally, from your computer, `ssh -p GENERATED_REMOTE_PORT cumulus@air.cumulusnetworks.com`
+
+
 ### Options 
 
   - **Fully IPv4**
