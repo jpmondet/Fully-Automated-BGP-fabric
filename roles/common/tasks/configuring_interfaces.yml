@@ -35,7 +35,7 @@
 
 - name: Bouncing ifaces
   #shell: ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force --no-scripts
-  shell: ifreload --allow=ansible
+  shell: ifreload --allow=ansible ; ifdown "{{ item.name }}" --force && ifup "{{ item.name }}" --force --no-scripts
   with_items: 
     - "{{ interfaces }}"
   ignore_errors: yes
