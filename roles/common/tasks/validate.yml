@@ -5,12 +5,12 @@
 
 - name: append all known IPv4 addresses from the group network
   set_fact:
-    ips: "{{ ips + [item] }}"
-    #with_inventory_hostnames: servers
-  loop: "{{ lookup('subelements', groups['servers'], 'ansible_lo_1.ipv4.address', errors='warn') }}"
+    ips: "{{ ips + hostvars[item].ansible_lo.ipv4_secondaries }}"
+  with_inventory_hostnames: servers
+    #loop: "{{ groups['servers'] }}"
 
 - name: ping all IP addresses in ips
-  shell: "ping {{ item }} -c 1"
+  shell: "ping {{ item.address }} -c 1"
   with_items:
     - "{{ ips }}"
   register: result
