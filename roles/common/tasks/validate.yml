@@ -5,7 +5,7 @@
 
 - name: append all known IPv4 addresses from the group network
   set_fact:
-    ips: "{{ ips + hostvars[item].ansible_lo.ipv4_secondaries }}"
+    ips: "{{ ips + hostvars[item].ansible_lo['ipv4_secondaries'] }}"
   with_inventory_hostnames: servers
     #loop: "{{ groups['servers'] }}"
 
