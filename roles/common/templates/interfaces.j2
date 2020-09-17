@@ -1,6 +1,7 @@
 #jinja2:lstrip_blocks: True
 #jinja2:trim_blocks: True
 auto lo
+allow-ansible lo
 iface lo inet loopback
 auto eth0
 iface eth0 inet static
@@ -18,6 +19,7 @@ iface mgmt
 {% for int in interfaces -%}
 {% if int.name != 'lo' -%}
 auto {{ int.name }}
+allow-ansible {{ int.name }}
 {% endif %}
   {% if int.addr is defined and option is not defined -%}
 iface {{ int.name }} inet static
@@ -40,7 +42,8 @@ We have to do things differently if we are using IPv6 because Cumulus Linux inte
 doesn't support "inet6 auto" (that's why there is a weird "if" statement matching on "swp"...) 
 
 #}
-iface {{ int.name }} {% if "swp" not in int.name and int.name != "lo" %} inet6 auto {% endif %}
+#iface {{ int.name }} {% if int.name != "lo" %} inet6 auto {% endif %}  # THIS IS NOW DEPRECATED SINCE EVERYTHING IS HANDLED BY ifupdown2 on CITC
+iface {{ int.name }}
 
   {% endif -%}
 {% endfor -%}
